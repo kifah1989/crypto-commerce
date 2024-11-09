@@ -37,7 +37,7 @@ export default function RootLayout({
             <head />
             <body
                 className={clsx(
-                    'min-h-screen bg-background font-sans antialiased',
+                    'min-h-screen bg-light-gradient dark:bg-dark-gradient font-sans antialiased',
                     fontSans.variable
                 )}
             >
@@ -57,9 +57,8 @@ export default function RootLayout({
                                 title="nextui.org homepage"
                             >
                                 <span className="text-default-600">
-                                    Powered by
+                                    Kifah Andary All Rights Reserved
                                 </span>
-                                <p className="text-primary">NextUI</p>
                             </Link>
                         </footer>
                     </div>

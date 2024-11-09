@@ -36,7 +36,6 @@ const modal = createAppKit({
     },
 })
 
-console.log(modal)
 function ContextProvider({
     children,
     cookies,

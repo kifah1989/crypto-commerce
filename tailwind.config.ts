@@ -51,7 +51,8 @@ const tailwindConfig: Config = {
             }
         },
         backgroundImage: {
-            'light-gradient': 'bg-gradient-to-r from-teal-400 to-yellow-200',
+            'light-gradient':
+                'linear-gradient(242.65deg, #e6ccff 0%, #d6ccf5 16.77%, #c2d1e6 41.59%, #d6e1f0 79.71%, #e6edf5 100.78%)',
             'dark-gradient':
                 'linear-gradient(242.65deg, #500082 0%, #1e0952 16.77%, #081e3a 41.59%, #051225 79.71%, #040d1f 100.78%)',
             none: 'none',

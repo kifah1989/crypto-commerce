@@ -1,9 +1,4 @@
-import { Link } from '@nextui-org/link'
-import { button as buttonStyles } from '@nextui-org/theme'
-
-import { siteConfig } from '@/config/site'
 import { title } from '@/components/primitives'
-import { GithubIcon } from '@/components/icons'
 import ProductCard from '@/components/productCard'
 
 export default function Home() {
@@ -18,9 +13,6 @@ export default function Home() {
                 <span className={title()}>websites</span>
             </div>
             <div className="flex gap-3">
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
                 <ProductCard />
             </div>
         </section>

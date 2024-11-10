@@ -1,11 +1,12 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { VisuallyHidden } from '@react-aria/visually-hidden'
 import { SwitchProps, useSwitch } from '@nextui-org/switch'
 import { useTheme } from 'next-themes'
 import { useIsSSR } from '@react-aria/ssr'
 import clsx from 'clsx'
+import { useAppKitTheme } from '@reown/appkit/react'
 
 import { SunFilledIcon, MoonFilledIcon } from '@/components/icons'
 
@@ -24,7 +25,16 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
     const onChange = () => {
         theme === 'light' ? setTheme('dark') : setTheme('light')
     }
+    const { setThemeMode, setThemeVariables } = useAppKitTheme()
 
+    useEffect(() => {
+        setThemeVariables({
+            '--w3m-color-mix': '#081D39',
+            '--w3m-color-mix-strength': 40,
+        })
+
+        setThemeMode(theme === 'light' ? 'light' : 'dark')
+    }, [theme])
     const {
         Component,
         slots,

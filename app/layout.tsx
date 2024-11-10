@@ -7,7 +7,7 @@ import clsx from 'clsx'
 import { Providers } from './providers'
 
 import { siteConfig } from '@/config/site'
-import { fontSans } from '@/config/fonts'
+import { fontOrbitron } from '@/config/fonts'
 import { Navbar } from '@/components/navbar'
 import ContextProvider from '@/context'
 
@@ -41,8 +41,8 @@ export default function RootLayout({
             <head />
             <body
                 className={clsx(
-                    'min-h-screen bg-light-gradient dark:bg-dark-gradient font-sans antialiased',
-                    fontSans.variable
+                    'min-h-screen bg-light-gradient dark:bg-dark-gradient font-orbitron antialiased',
+                    fontOrbitron.variable
                 )}
             >
                 <ContextProvider cookies={cookies}>

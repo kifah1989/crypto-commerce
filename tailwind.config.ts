@@ -329,6 +329,7 @@ const tailwindConfig: Config = {
             DEFAULT: '1',
         },
         fontFamily: {
+            orbitron: ['var(--font-orbitron)'],
             sans: [
                 'ui-sans-serif',
                 'system-ui',
@@ -355,6 +356,7 @@ const tailwindConfig: Config = {
                 '"Liberation Mono"',
                 '"Courier New"',
                 'monospace',
+                '"Orbitron"',
             ],
         },
         fontSize: {

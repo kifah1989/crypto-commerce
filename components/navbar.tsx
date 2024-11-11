@@ -69,6 +69,7 @@ export const Navbar = () => {
                 <NavbarItem className="hidden md:flex">
                     <appkit-button />
                 </NavbarItem>
+                {/* @ts-ignore */}
                 <ThemeSwitch />
             </NavbarContent>
 
@@ -80,6 +81,7 @@ export const Navbar = () => {
                 >
                     <GithubIcon className="text-default-500" />
                 </Link>
+                {/* @ts-ignore */}
                 <ThemeSwitch />
                 <NavbarMenuToggle />
             </NavbarContent>

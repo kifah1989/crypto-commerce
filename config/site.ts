@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-    name: 'Siraj is Gay',
-    description: 'Byklo fr',
+    name: 'Crypto Commerce',
+    description: 'by things with NFT Warranty',
     navItems: [
         {
             label: 'Home',

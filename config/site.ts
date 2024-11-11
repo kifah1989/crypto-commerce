@@ -2,7 +2,7 @@ export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
     name: 'Crypto Commerce',
-    description: 'by things with NFT Warranty',
+    description: 'Buy Things With NFT Warranty',
     navItems: [
         {
             label: 'Home',

@@ -1,3 +1,4 @@
+'use client'
 import {
     Navbar as NextUINavbar,
     NavbarContent,
@@ -7,24 +8,30 @@ import {
     NavbarItem,
     NavbarMenuItem,
 } from '@nextui-org/navbar'
-import { Link } from '@nextui-org/link'
 import { link as linkStyles } from '@nextui-org/theme'
 import NextLink from 'next/link'
 import clsx from 'clsx'
+import { useReducer } from 'react'
+import { Link } from '@nextui-org/link'
 
 import { siteConfig } from '@/config/site'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { GithubIcon, Logo } from '@/components/icons'
+import { Logo } from '@/components/icons'
 
 export const Navbar = () => {
+    const [isMenuOpen, setIsMenuOpen] = useReducer((current) => !current, false)
+
     return (
         <NextUINavbar
             className="bg-transparent"
             height={80}
             isBlurred={false}
+            isMenuOpen={isMenuOpen}
             maxWidth="full"
             position="sticky"
+            onMenuOpenChange={setIsMenuOpen}
         >
+            {/* Logo */}
             <NavbarContent className="basis-1/5 sm:basis-full " justify="start">
                 <NavbarBrand as="li" className="gap-3 max-w-fit">
                     <NextLink
@@ -35,7 +42,7 @@ export const Navbar = () => {
                     </NextLink>
                 </NavbarBrand>
             </NavbarContent>
-
+            {/* Menu */}
             <NavbarContent
                 className="hidden sm:flex basis-1/5 sm:basis-full"
                 justify="center"
@@ -62,45 +69,32 @@ export const Navbar = () => {
                     </ul>
                 </NavbarItem>
             </NavbarContent>
-            <NavbarContent
-                className="hidden sm:flex basis-1/5 sm:basis-full"
-                justify="end"
-            >
-                <NavbarItem className="hidden md:flex">
+            {/* Actions */}
+            <NavbarContent className=" basis-1 pl-4" justify="end">
+                <NavbarItem className="flex">
                     <appkit-button />
                 </NavbarItem>
                 {/* @ts-ignore */}
                 <ThemeSwitch />
+                <NavbarMenuToggle className="lg:hidden" />
             </NavbarContent>
 
-            <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-                <Link
-                    isExternal
-                    aria-label="Github"
-                    href={siteConfig.links.github}
-                >
-                    <GithubIcon className="text-default-500" />
-                </Link>
-                {/* @ts-ignore */}
-                <ThemeSwitch />
-                <NavbarMenuToggle />
-            </NavbarContent>
-
-            <NavbarMenu>
+            <NavbarMenu className="lg:hidden">
                 <div className="mx-4 mt-2 flex flex-col gap-2">
                     {siteConfig.navMenuItems.map((item, index) => (
                         <NavbarMenuItem key={`${item}-${index}`}>
                             <Link
-                                color={
-                                    index === 2
-                                        ? 'primary'
-                                        : index ===
-                                            siteConfig.navMenuItems.length - 1
-                                          ? 'danger'
-                                          : 'foreground'
-                                }
-                                href="#"
-                                size="lg"
+                                as={NextLink}
+                                className={clsx(
+                                    linkStyles({
+                                        color: 'foreground',
+                                        size: 'lg',
+                                    }),
+                                    'font-bold'
+                                )}
+                                color="foreground"
+                                href={item.href}
+                                onPress={() => setIsMenuOpen()}
                             >
                                 {item.label}
                             </Link>

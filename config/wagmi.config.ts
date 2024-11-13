@@ -4,7 +4,7 @@ import { mainnet, arbitrum } from '@reown/appkit/networks'
 
 import { vTestnet } from './tenderly.config'
 
-export const projectId = process.env.NEXT_PUBLIC_REOWN_PROJECT_ID
+export const projectId = process.env.REOWN_PROJECT_ID
 
 if (!projectId) {
     throw new Error('Project ID is not defined')

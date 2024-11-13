@@ -35,6 +35,8 @@ const modal = createAppKit({
         analytics: true,
         email: false,
         socials: false,
+        swaps: false,
+        onramp: false,
     },
     allWallets: 'HIDE',
 })

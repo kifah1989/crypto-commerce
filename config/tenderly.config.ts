@@ -8,15 +8,13 @@ export const vTestnet = defineChain({
     nativeCurrency: { name: 'vMain', symbol: 'vETH', decimals: 18 },
     rpcUrls: {
         default: {
-            http: [
-                'https://rpc.tenderly.co/fork/901f6f5f-c7cd-48fd-97c2-45376be610cc',
-            ],
+            http: [process.env.NEXT_PUBLIC_TENDERLY_VIRTUAL_TESTNET_RPC!],
         },
     },
     blockExplorers: {
         default: {
             name: 'Tenderly Explorer',
-            url: process.env.TENDERLY_BLOCK_EXPLORER_RPC!, // replace this with your Virtual TestNet's explorer URL
+            url: process.env.NEXT_PUBLIC_TENDERLY_BLOCK_EXPLORER_RPC!, // replace this with your Virtual TestNet's explorer URL
         },
     },
     contracts: {

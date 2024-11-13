@@ -4,7 +4,7 @@ import { mainnet, arbitrum } from '@reown/appkit/networks'
 
 import { vTestnet } from './tenderly.config'
 
-export const projectId = process.env.REOWN_PROJECT_ID
+export const projectId = process.env.NEXT_PUBLIC_REOWN_PROJECT_ID!
 
 if (!projectId) {
     throw new Error('Project ID is not defined')
@@ -18,7 +18,9 @@ export const wagmiAdapter = new WagmiAdapter({
     }),
     ssr: true,
     transports: {
-        [vTestnet.id]: http(process.env.TENDERLY_VIRTUAL_TESTNET_RPC!),
+        [vTestnet.id]: http(
+            process.env.NEXT_PUBLIC_TENDERLY_VIRTUAL_TESTNET_RPC!
+        ),
     },
     networks,
     projectId,

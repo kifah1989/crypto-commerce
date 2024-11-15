@@ -31,3 +31,22 @@ export const vTestnet = defineChain({
         },
     },
 })
+
+export const hardhat = defineChain({
+    id: 31337,
+    caipNetworkId: 'eip155:31337',
+    chainNamespace: 'eip155',
+    name: 'Hardhat',
+    nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+    rpcUrls: {
+        default: {
+            http: ['http://localhost:8545'],
+        },
+    },
+    blockExplorers: {
+        default: {
+            name: 'Hardhat Explorer',
+            url: 'http://localhost:8545',
+        },
+    },
+})

@@ -14,6 +14,8 @@ import clsx from 'clsx'
 import { useReducer } from 'react'
 import { Link } from '@nextui-org/link'
 
+import SignIn from './signin'
+
 import { siteConfig } from '@/config/site'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { Logo } from '@/components/icons'
@@ -73,6 +75,7 @@ export const Navbar = () => {
             <NavbarContent className=" basis-1 pl-4" justify="end">
                 <NavbarItem className="flex">
                     <appkit-button />
+                    <SignIn />
                 </NavbarItem>
                 {/* @ts-ignore */}
                 <ThemeSwitch />

@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React, { type ReactNode } from 'react'
 import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
 
-import { vTestnet } from '@/config/tenderly.config'
+import { vTestnet, hardhat } from '@/config/tenderly.config'
 import { wagmiAdapter, projectId } from '@/config/wagmi.config'
 
 // Set up queryClient
@@ -29,7 +29,7 @@ const metadata = {
 const modal = createAppKit({
     adapters: [wagmiAdapter],
     projectId,
-    networks: [mainnet, arbitrum, vTestnet],
+    networks: [mainnet, arbitrum, vTestnet, hardhat],
     metadata,
     features: {
         analytics: true,

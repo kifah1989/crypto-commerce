@@ -38,7 +38,9 @@
         "next": "14.2.4",
         "next-auth": "^5.0.0-beta.25",
         "next-themes": "^0.2.1",
+        "ra-data-json-server": "^5.3.4",
         "react": "18.3.1",
+        "react-admin": "^5.3.4",
         "react-dom": "18.3.1",
         "viem": "^2.21.44",
         "wagmi": "^2.12.29"

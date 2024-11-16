@@ -11,22 +11,30 @@ datasource db {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
-  email    String     @unique
-  name     String
-  password String
-  posts    Warranty[]
-  wallets  Wallet[]
+  id         Int        @id @default(autoincrement())
+  email      String     @unique
+  name       String
+  password   String
+  warranties Warranty[]
+  wallets    Wallet[]
+  orders     Order[]
+  cart       Cart       @relation(fields: [cartId], references: [id])
+  cartId     Int
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 
+  @@index([email])
   @@map("users")
 }
 
 model Wallet {
-  id            Int    @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   walletAddress String
   chainId       String
-  user          User   @relation(fields: [userId], references: [id])
+  user          User     @relation(fields: [userId], references: [id])
   userId        Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@map("wallets")
 }
@@ -39,6 +47,96 @@ model Warranty {
   isActive       Boolean  @default(false)
   user           User     @relation(fields: [userId], references: [id])
   userId         Int
+  Product        Product?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@map("warranties")
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  image       String
+  price       Int
+  quantity    Int
+  warranty    Warranty @relation(fields: [warrantyId], references: [id])
+  warrantyId  Int      @unique
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  sizes       Size[]   @relation("ProductSizes")
+  colors      Color[]  @relation("ProductColors")
+  carts       Cart[]   @relation("CartProducts")
+  reviews     Review[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([name])
+  @@map("products")
+}
+
+model Cart {
+  id        Int       @id @default(autoincrement())
+  products  Product[] @relation("CartProducts")
+  user      User[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("carts")
+}
+
+model Order {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  quantity  Int
+  price     Int
+  status    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("orders")
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("categories")
+}
+
+model Size {
+  id        Int       @id @default(autoincrement())
+  name      String
+  products  Product[] @relation("ProductSizes")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("sizes")
+}
+
+model Color {
+  id        Int       @id @default(autoincrement())
+  name      String
+  products  Product[] @relation("ProductColors")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("colors")
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  content   String
+  rating    Int
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("reviews")
 }

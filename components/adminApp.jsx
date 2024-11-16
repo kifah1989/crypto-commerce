@@ -1,23 +1,26 @@
+'use client'
 import { Admin, Resource, ListGuesser, EditGuesser } from 'react-admin'
 import jsonServerProvider from 'ra-data-json-server'
+
+import { AdminLayout } from './adminLayout'
 
 const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com')
 
 const AdminApp = () => (
-    <Admin dataProvider={dataProvider}>
+    <Admin dataProvider={dataProvider} layout={AdminLayout}>
         <Resource
-            name="users"
-            list={ListGuesser}
             edit={EditGuesser}
+            list={ListGuesser}
+            name="users"
             recordRepresentation="name"
         />
         <Resource
-            name="posts"
-            list={ListGuesser}
             edit={EditGuesser}
+            list={ListGuesser}
+            name="posts"
             recordRepresentation="title"
         />
-        <Resource name="comments" list={ListGuesser} edit={EditGuesser} />
+        <Resource edit={EditGuesser} list={ListGuesser} name="comments" />
     </Admin>
 )
 

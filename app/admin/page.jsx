@@ -1,6 +1,8 @@
 import dynamic from 'next/dynamic'
-const AdminApp = dynamic(() => import('@/components/AdminApp'), { ssr: false })
+const AdminApp = dynamic(() => import('@/components/adminApp'), { ssr: false })
 
-const Home = () => <AdminApp />
+const Home = () => {
+    return <AdminApp />
+}
 
 export default Home

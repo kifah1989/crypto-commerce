@@ -29,7 +29,8 @@ const AdminApp = () => {
             RaList: {
                 styleOverrides: {
                     root: {
-                        width: '100%',
+                        maxWidth: '100%',
+                        overflowX: 'auto',
                     },
                 },
             },

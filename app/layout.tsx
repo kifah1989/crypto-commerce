@@ -40,7 +40,7 @@ export default function RootLayout({
             <head />
             <body
                 className={clsx(
-                    'h-full bg-light-gradient dark:bg-dark-gradient font-orbitron antialiased',
+                    'min-h-screen bg-light-gradient dark:bg-dark-gradient font-orbitron antialiased',
                     fontOrbitron.variable
                 )}
             >

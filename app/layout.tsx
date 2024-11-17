@@ -41,7 +41,7 @@ export default function RootLayout({
             <head />
             <body
                 className={clsx(
-                    'min-h-screen bg-light-gradient dark:bg-dark-gradient font-orbitron antialiased',
+                    'h-dvh bg-light-gradient dark:bg-dark-gradient font-orbitron antialiased',
                     fontOrbitron.variable
                 )}
             >
@@ -52,24 +52,13 @@ export default function RootLayout({
                             defaultTheme: 'dark',
                         }}
                     >
-                        <div className="relative flex flex-col h-screen">
-                            <Navbar />
-                            <main className="container mx-auto max-w-7xl flex-grow">
-                                {children}
-                            </main>
-                            <footer className="w-full flex items-center justify-center py-3">
-                                <Link
-                                    isExternal
-                                    className="flex items-center gap-1 text-current"
-                                    href="https://nextui-docs-v2.vercel.app?utm_source=next-app-template"
-                                    title="nextui.org homepage"
-                                >
-                                    <span className="text-default-600">
-                                        Kifah Andary All Rights Reserved
-                                    </span>
-                                </Link>
-                            </footer>
-                        </div>
+                        <Navbar />
+                        <main className="p-5">{children}</main>
+                        <footer className="w-full flex items-center justify-center p-3">
+                            <span className="text-default-600">
+                                Kifah Andary All Rights Reserved
+                            </span>
+                        </footer>
                     </Providers>
                 </ContextProvider>
             </body>

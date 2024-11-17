@@ -1,9 +1,10 @@
-import { AppBar, Layout } from 'react-admin'
+import { Menu, Sidebar } from 'react-admin'
 
 export const AdminLayout = ({ children }) => (
-    <Layout appBar={AdminAppBar} sx={{ '& .RaLayout-appFrame': { margin: 0 } }}>
+    <div className="flex flex-row items-start">
+        <Sidebar sx={{ height: 'fit-content' }}>
+            <Menu />
+        </Sidebar>
         {children}
-    </Layout>
+    </div>
 )
-
-const AdminAppBar = () => <AppBar color="primary" position="sticky" />

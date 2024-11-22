@@ -29,7 +29,8 @@
         "**/*.tsx",
         "**/*.js",
         "**/*.jsx",
-        ".next/types/**/*.ts"
+        ".next/types/**/*.ts",
+        "app/signin-register"
     ],
     "exclude": ["node_modules"]
 }

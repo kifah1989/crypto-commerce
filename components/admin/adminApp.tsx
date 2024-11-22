@@ -5,13 +5,16 @@ import {
     ListGuesser,
     EditGuesser,
     defaultTheme,
+    Button,
+    Link,
 } from 'react-admin'
 import jsonServerProvider from 'ra-data-json-server'
 import { useTheme } from 'next-themes'
 
 import { AdminLayout } from './adminLayout'
+import { ProductCreate } from './products/create'
 
-const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com')
+const dataProvider = jsonServerProvider('http://localhost:5173/api')
 
 const AdminApp = () => {
     const { theme } = useTheme()
@@ -40,18 +43,25 @@ const AdminApp = () => {
     return (
         <Admin dataProvider={dataProvider} layout={AdminLayout} theme={myTheme}>
             <Resource
+                create={ProductCreate}
                 edit={EditGuesser}
-                list={ListGuesser}
-                name="users"
-                recordRepresentation="name"
+                list={() => (
+                    <>
+                        <Button
+                            color="primary"
+                            component={Link}
+                            label="Create Product
+"
+                            to="/product/create"
+                            variant="contained"
+                        />
+
+                        <ListGuesser />
+                    </>
+                )}
+                name="product"
+                recordRepresentation="product"
             />
-            <Resource
-                edit={EditGuesser}
-                list={ListGuesser}
-                name="posts"
-                recordRepresentation="title"
-            />
-            <Resource edit={EditGuesser} list={ListGuesser} name="comments" />
         </Admin>
     )
 }

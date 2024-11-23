@@ -13,7 +13,9 @@ import { useTheme } from 'next-themes'
 import { AdminLayout } from './adminLayout'
 import { ProductCreate } from './products/create'
 
-const dataProvider = jsonServerProvider('http://localhost:3000/api')
+const dataProvider = jsonServerProvider(
+    `${process.env.NEXT_PUBLIC_API_URL}/api`
+)
 
 const AdminApp = () => {
     const { theme } = useTheme()

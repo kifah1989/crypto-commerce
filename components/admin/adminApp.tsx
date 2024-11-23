@@ -4,7 +4,6 @@ import {
     Resource,
     ListGuesser,
     EditGuesser,
-    defaultTheme,
     Button,
     Link,
 } from 'react-admin'
@@ -19,7 +18,6 @@ const dataProvider = jsonServerProvider('http://localhost:5173/api')
 const AdminApp = () => {
     const { theme } = useTheme()
     const myTheme = {
-        ...defaultTheme,
         palette: {
             mode: theme === 'light' ? 'light' : 'dark',
         },
@@ -28,7 +26,6 @@ const AdminApp = () => {
             fontFamily: ['var(--font-orbitron)'].join(','),
         },
         components: {
-            ...defaultTheme.components,
             RaList: {
                 styleOverrides: {
                     root: {

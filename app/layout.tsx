@@ -40,7 +40,7 @@ export default async function RootLayout({
             <head />
             <body
                 className={clsx(
-                    'min-h-screen bg-light-gradient dark:bg-dark-gradient font-orbitron antialiased',
+                    'min-h-screen bg-light-gradient dark:bg-dark-gradient font-orbitron',
                     fontOrbitron.variable
                 )}
             >

@@ -14,7 +14,7 @@ import clsx from 'clsx'
 import { useReducer } from 'react'
 import { Link } from '@nextui-org/link'
 
-import SignIn from './signin'
+import UserDropDown from './user-drop-down'
 
 import { siteConfig } from '@/config/site'
 import { ThemeSwitch } from '@/components/theme-switch'
@@ -25,9 +25,7 @@ export const Navbar = () => {
 
     return (
         <NextUINavbar
-            className="bg-transparent"
             height={80}
-            isBlurred={false}
             isMenuOpen={isMenuOpen}
             maxWidth="full"
             position="sticky"
@@ -75,7 +73,7 @@ export const Navbar = () => {
             <NavbarContent className=" basis-1 pl-4" justify="end">
                 <NavbarItem className="flex">
                     <appkit-button />
-                    <SignIn />
+                    <UserDropDown />
                 </NavbarItem>
                 {/* @ts-ignore */}
                 <ThemeSwitch />

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.next-ui-drop-down,
+div[style*='opacity: 0'] {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}

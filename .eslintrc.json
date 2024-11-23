@@ -9,7 +9,9 @@
         "plugin:react/recommended",
         "plugin:prettier/recommended",
         "plugin:react-hooks/recommended",
-        "plugin:jsx-a11y/recommended"
+        "plugin:jsx-a11y/recommended",
+        "eslint:recommended",
+        "next"
     ],
     "plugins": [
         "react",

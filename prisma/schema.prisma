@@ -16,16 +16,17 @@ model User {
   email         String?         @unique
   emailVerified DateTime?
   image         String?
+  role          String          @default("user")
   accounts      Account[]
   sessions      Session[]
   Authenticator Authenticator[]
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
   warranties    Warranty[]
   wallets       Wallet[]
   orders        Order[]
   cart          Cart?           @relation(fields: [cartId], references: [id])
   cartId        Int?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
 
   @@map("Users")
 }

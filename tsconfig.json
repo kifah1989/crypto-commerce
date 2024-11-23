@@ -30,7 +30,7 @@
         "**/*.js",
         "**/*.jsx",
         ".next/types/**/*.ts",
-        "app/signin-register"
+        "app/signin"
     ],
     "exclude": ["node_modules"]
 }

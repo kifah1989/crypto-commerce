@@ -12,12 +12,11 @@ import { useTheme } from 'next-themes'
 
 import { AdminLayout } from './adminLayout'
 import { ProductCreate } from './products/create'
-
-const dataProvider = jsonServerProvider(
-    `${process.env.NEXT_PUBLIC_API_URL}/api`
-)
+//get the host programmatically
 
 const AdminApp = () => {
+    const host = window.location.host
+    const dataProvider = jsonServerProvider(`${host}/api`)
     const { theme } = useTheme()
     const myTheme = {
         palette: {

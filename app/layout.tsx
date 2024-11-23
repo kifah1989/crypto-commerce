@@ -9,6 +9,7 @@ import { siteConfig } from '@/config/site'
 import { fontOrbitron } from '@/config/fonts'
 import { Navbar } from '@/components/navbar'
 import ContextProvider from '@/context'
+import { SessionProvider } from 'next-auth/react'
 
 export const metadata: Metadata = {
     title: {
@@ -51,15 +52,17 @@ export default async function RootLayout({
                             defaultTheme: 'dark',
                         }}
                     >
-                        <Navbar />
-                        <main className="p-5 h-full">
-                            {children}
-                            <footer className="flex items-center justify-center p-3">
-                                <span className="text-default-600">
-                                    Kifah Andary All Rights Reserved
-                                </span>
-                            </footer>
-                        </main>
+                        <SessionProvider>
+                            <Navbar />
+                            <main className="p-5 h-full">
+                                {children}
+                                <footer className="flex items-center justify-center p-3">
+                                    <span className="text-default-600">
+                                        Kifah Andary All Rights Reserved
+                                    </span>
+                                </footer>
+                            </main>
+                        </SessionProvider>
                     </Providers>
                 </ContextProvider>
             </body>

@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth'
+import NextAuth, { User } from 'next-auth'
 import Google from 'next-auth/providers/google'
 import Resend from 'next-auth/providers/resend'
 import { PrismaAdapter } from '@auth/prisma-adapter'
@@ -11,11 +11,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
         Google,
         Resend({
-            // If your environment variable is named differently than default
             apiKey: process.env.AUTH_RESEND_KEY,
             from: 'Crypto Commerce <onboarding@resend.dev>',
         }),
     ],
+    callbacks: {
+        session({ session, token }: { session: any; token: any }) {
+            return session
+        },
+    },
     pages: {
         signIn: '/signin',
     },

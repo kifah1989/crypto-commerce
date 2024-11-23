@@ -13,7 +13,7 @@ import { useTheme } from 'next-themes'
 import { AdminLayout } from './adminLayout'
 import { ProductCreate } from './products/create'
 
-const dataProvider = jsonServerProvider('http://localhost:5173/api')
+const dataProvider = jsonServerProvider('http://localhost:3000/api')
 
 const AdminApp = () => {
     const { theme } = useTheme()

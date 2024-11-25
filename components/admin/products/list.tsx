@@ -1,17 +1,10 @@
 import { use, useEffect } from 'react'
 import {
-    Button,
     Datagrid,
     DateField,
-    Link,
     List,
     ReferenceField,
     TextField,
-    useDataProvider,
-    useGetList,
-    useList,
-    useListContext,
-    useRecordContext,
 } from 'react-admin'
 
 export const ProductList = () => {

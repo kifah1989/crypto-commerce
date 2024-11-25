@@ -1,9 +1,15 @@
 'use client'
 import { NextPage } from 'next'
-import dynamic from 'next/dynamic'
 import { useSession } from 'next-auth/react'
-const AdminApp = dynamic(() => import('@/components/admin/adminApp'), {
-    ssr: false,
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import AdminApp from '@/components/admin/adminApp'
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: Infinity,
+        },
+    },
 })
 
 const Home: NextPage = () => {
@@ -12,9 +18,13 @@ const Home: NextPage = () => {
         return <div>Loading...</div>
     }
     if ((session?.user as any)?.role !== 'admin') {
-        return <div>Not signed in</div>
+        return <div>Not an admin</div>
     }
-    return <AdminApp />
+    return (
+        <QueryClientProvider client={queryClient}>
+            <AdminApp />
+        </QueryClientProvider>
+    )
 }
 
 export default Home

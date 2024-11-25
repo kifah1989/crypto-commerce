@@ -1,18 +1,11 @@
 'use client'
-import {
-    Admin,
-    Resource,
-    ListGuesser,
-    EditGuesser,
-    Button,
-    Link,
-} from 'react-admin'
+import { Admin, Resource, EditGuesser } from 'react-admin'
 import jsonServerProvider from 'ra-data-json-server'
 import { useTheme } from 'next-themes'
 
 import { AdminLayout } from './adminLayout'
 import { ProductCreate } from './products/create'
-//get the host programmatically
+import { ProductList } from './products/list'
 
 const AdminApp = () => {
     const dataProvider = jsonServerProvider(
@@ -38,26 +31,12 @@ const AdminApp = () => {
             },
         },
     }
-
     return (
         <Admin dataProvider={dataProvider} layout={AdminLayout} theme={myTheme}>
             <Resource
                 create={ProductCreate}
                 edit={EditGuesser}
-                list={() => (
-                    <>
-                        <Button
-                            color="primary"
-                            component={Link}
-                            label="Create Product
-"
-                            to="/product/create"
-                            variant="contained"
-                        />
-
-                        <ListGuesser />
-                    </>
-                )}
+                list={ProductList}
                 name="product"
                 recordRepresentation="product"
             />

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+    postgres:
+        image: postgres:17
+        container_name: crypto-commerce-db
+        ports:
+            - '5442:5432'
+        environment:
+            POSTGRES_DB: postgres
+            POSTGRES_USER: dbuser
+            POSTGRES_PASSWORD: dbpass
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+
+volumes:
+    postgres_data:

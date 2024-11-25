@@ -38,3 +38,8 @@ next-env.d.ts
 .flaskenv*
 !.env.project
 !.env.vault
+
+# amplify
+.amplify
+amplify_outputs*
+amplifyconfiguration*

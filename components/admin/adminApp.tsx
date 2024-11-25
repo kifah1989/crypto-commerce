@@ -15,8 +15,9 @@ import { ProductCreate } from './products/create'
 //get the host programmatically
 
 const AdminApp = () => {
-    const host = window.location.host
-    const dataProvider = jsonServerProvider(`${host}/api`)
+    const dataProvider = jsonServerProvider(
+        `${process.env.NEXT_PUBLIC_API_URL}/api`
+    )
     const { theme } = useTheme()
     const myTheme = {
         palette: {

@@ -37,8 +37,8 @@ const AdminApp = () => {
                 create={ProductCreate}
                 edit={EditGuesser}
                 list={ProductList}
-                name="product"
-                recordRepresentation="product"
+                name="products"
+                recordRepresentation="products"
             />
         </Admin>
     )

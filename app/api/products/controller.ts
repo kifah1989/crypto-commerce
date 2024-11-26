@@ -41,3 +41,28 @@ export const getSingleProduct = async (id: number) => {
 
     return NextResponse.json(post)
 }
+
+export const createProduct = async (req: NextRequest) => {
+    const data = await req.json()
+    const post = await prisma.product.create({ data })
+    return NextResponse.json(post)
+}
+
+export const editProduct = async (req: NextRequest) => {
+    const data = await req.json()
+    console.log('edit request', data)
+    const post = await prisma.product.update({
+        where: { id: data.id },
+        data,
+    })
+
+    return NextResponse.json(post)
+}
+
+export const deleteProduct = async (id: number) => {
+    const post = await prisma.product.delete({
+        where: { id },
+    })
+
+    return NextResponse.json(post)
+}

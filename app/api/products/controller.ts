@@ -50,7 +50,6 @@ export const createProduct = async (req: NextRequest) => {
 
 export const editProduct = async (req: NextRequest) => {
     const data = await req.json()
-    console.log('edit request', data)
     const post = await prisma.product.update({
         where: { id: data.id },
         data,

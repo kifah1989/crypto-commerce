@@ -2,9 +2,7 @@ import '@/styles/globals.css'
 import { Metadata, Viewport } from 'next'
 import { headers } from 'next/headers'
 import clsx from 'clsx'
-
 import { Providers } from './providers'
-
 import { siteConfig } from '@/config/site'
 import { fontOrbitron } from '@/config/fonts'
 import { Navbar } from '@/components/navbar'

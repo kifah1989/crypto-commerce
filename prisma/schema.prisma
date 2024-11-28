@@ -11,21 +11,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator dbml {
+  provider   = "prisma-dbml-generator"
+  output     = "../dbml"
+  outputName = "crypto-comerce.dbml"
+}
+
 model User {
   id            String          @id @default(cuid())
-  name          String?
+  accounts      Account[]
+  Authenticator Authenticator[]
+  cart          Cart?           @relation(fields: [cartId], references: [id])
+  cartId        Int?            @unique
   email         String?         @unique
   emailVerified DateTime?
   image         String?
-  role          String?
-  accounts      Account[]
-  sessions      Session[]
-  Authenticator Authenticator[]
-  warranties    Warranty[]
-  wallets       Wallet[]
+  name          String?
   orders        Order[]
-  cart          Cart?           @relation(fields: [cartId], references: [id])
-  cartId        Int?
+  reviews       Review[]
+  role          String?
+  sessions      Session[]
+  wallets       Wallet[]
+  warranties    Warranty[]
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 
@@ -33,23 +40,21 @@ model User {
 }
 
 model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
+  id                String   @id @default(cuid())
+  access_token      String?
+  expires_at        Int?
+  id_token          String?
   provider          String
   providerAccountId String
   refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
   scope             String?
-  id_token          String?
   session_state     String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token_type        String?
+  type              String
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
   @@unique([provider, providerAccountId])
   @@map("Accounts")
@@ -57,37 +62,35 @@ model Account {
 
 model Session {
   id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
   expires      DateTime
+  sessionToken String   @unique
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  userId       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@map("Sessions")
 }
 
 model VerificationToken {
+  expires    DateTime
   identifier String
   token      String
-  expires    DateTime
 
   @@unique([identifier, token])
   @@map("VerificationTokens")
 }
 
 model Authenticator {
-  credentialID         String  @unique
-  userId               String
-  providerAccountId    String
-  credentialPublicKey  String
   counter              Int
-  credentialDeviceType String
   credentialBackedUp   Boolean
+  credentialDeviceType String
+  credentialID         String  @unique
+  credentialPublicKey  String
+  providerAccountId    String
   transports           String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId               String
 
   @@id([userId, credentialID])
   @@map("Authenticators")
@@ -95,10 +98,10 @@ model Authenticator {
 
 model Wallet {
   id            Int      @id @default(autoincrement())
-  walletAddress String
   chainId       String
-  user          User     @relation(fields: [userId], references: [id])
-  userId        String
+  user          User?    @relation(fields: [userId], references: [id])
+  userId        String?
+  walletAddress String   @unique
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -107,13 +110,14 @@ model Wallet {
 
 model Warranty {
   id             Int      @id @default(autoincrement())
-  tokenId        String
-  warrantyPeriod String
   expiryTime     DateTime
   isActive       Boolean  @default(false)
-  user           User     @relation(fields: [userId], references: [id])
-  userId         String
   Product        Product?
+  productId      Int
+  tokenId        String   @unique
+  user           User?    @relation(fields: [userId], references: [id])
+  userId         String?
+  warrantyPeriod Int
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
@@ -121,22 +125,21 @@ model Warranty {
 }
 
 model Product {
-  id          Int       @id @default(autoincrement())
-  name        String
+  id          Int        @id @default(autoincrement())
+  carts       Cart[]
+  categories  Category[]
+  colors      Color[]
   description String?
   image       String?
+  name        String
   price       Int?
   quantity    Int?
-  warranty    Warranty? @relation(fields: [warrantyId], references: [id])
-  warrantyId  Int?      @unique
-  category    Category? @relation(fields: [categoryId], references: [id])
-  categoryId  Int?
-  sizes       Size[]    @relation("ProductSizes")
-  colors      Color[]   @relation("ProductColors")
-  carts       Cart[]    @relation("CartProducts")
   reviews     Review[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  sizes       Size[]
+  warranty    Warranty?  @relation(fields: [warrantyId], references: [id])
+  warrantyId  Int?       @unique
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 
   @@index([name])
   @@map("products")
@@ -144,8 +147,8 @@ model Product {
 
 model Cart {
   id        Int       @id @default(autoincrement())
-  products  Product[] @relation("CartProducts")
-  user      User[]
+  products  Product[]
+  user      User?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
@@ -154,11 +157,11 @@ model Cart {
 
 model Order {
   id        Int      @id @default(autoincrement())
+  price     Int
+  quantity  Int
+  status    String
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  quantity  Int
-  price     Int
-  status    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -167,7 +170,7 @@ model Order {
 
 model Category {
   id        Int       @id @default(autoincrement())
-  name      String    @unique
+  category  String    @unique
   products  Product[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -177,8 +180,8 @@ model Category {
 
 model Size {
   id        Int       @id @default(autoincrement())
-  name      String
-  products  Product[] @relation("ProductSizes")
+  size      String    @unique
+  products  Product[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
@@ -188,7 +191,7 @@ model Size {
 model Color {
   id        Int       @id @default(autoincrement())
   name      String
-  products  Product[] @relation("ProductColors")
+  products  Product[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
@@ -198,9 +201,11 @@ model Color {
 model Review {
   id        Int      @id @default(autoincrement())
   content   String
-  rating    Int
   product   Product  @relation(fields: [productId], references: [id])
   productId Int
+  rating    Int
+  User      User     @relation(fields: [userId], references: [id])
+  userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

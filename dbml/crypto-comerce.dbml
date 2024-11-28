@@ -1,0 +1,218 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Users {
+  id String [pk]
+  accounts Accounts [not null]
+  Authenticator Authenticators [not null]
+  cart carts
+  cartId Int [unique]
+  email String [unique]
+  emailVerified DateTime
+  image String
+  name String
+  orders orders [not null]
+  reviews reviews [not null]
+  role String
+  sessions Sessions [not null]
+  wallets wallets [not null]
+  warranties warranties [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Accounts {
+  id String [pk]
+  access_token String
+  expires_at Int
+  id_token String
+  provider String [not null]
+  providerAccountId String [not null]
+  refresh_token String
+  scope String
+  session_state String
+  token_type String
+  type String [not null]
+  user Users [not null]
+  userId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+
+  indexes {
+    (provider, providerAccountId) [unique]
+  }
+}
+
+Table Sessions {
+  id String [pk]
+  expires DateTime [not null]
+  sessionToken String [unique, not null]
+  user Users [not null]
+  userId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table VerificationTokens {
+  expires DateTime [not null]
+  identifier String [not null]
+  token String [not null]
+
+  indexes {
+    (identifier, token) [unique]
+  }
+}
+
+Table Authenticators {
+  counter Int [not null]
+  credentialBackedUp Boolean [not null]
+  credentialDeviceType String [not null]
+  credentialID String [unique, not null]
+  credentialPublicKey String [not null]
+  providerAccountId String [not null]
+  transports String
+  user Users [not null]
+  userId String [not null]
+
+  indexes {
+    (userId, credentialID) [pk]
+  }
+}
+
+Table wallets {
+  id Int [pk, increment]
+  chainId String [not null]
+  user Users
+  userId String
+  walletAddress String [unique, not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table warranties {
+  id Int [pk, increment]
+  expiryTime DateTime [not null]
+  isActive Boolean [not null, default: false]
+  Product products
+  productId Int [not null]
+  tokenId String [unique, not null]
+  user Users
+  userId String
+  warrantyPeriod Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table products {
+  id Int [pk, increment]
+  carts carts [not null]
+  categories categories [not null]
+  colors colors [not null]
+  description String
+  image String
+  name String [not null]
+  price Int
+  quantity Int
+  reviews reviews [not null]
+  sizes sizes [not null]
+  warranty warranties
+  warrantyId Int [unique]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table carts {
+  id Int [pk, increment]
+  products products [not null]
+  user Users
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table orders {
+  id Int [pk, increment]
+  price Int [not null]
+  quantity Int [not null]
+  status String [not null]
+  user Users [not null]
+  userId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table categories {
+  id Int [pk, increment]
+  category String [unique, not null]
+  products products [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table sizes {
+  id Int [pk, increment]
+  size String [unique, not null]
+  products products [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table colors {
+  id Int [pk, increment]
+  name String [not null]
+  products products [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table reviews {
+  id Int [pk, increment]
+  content String [not null]
+  product products [not null]
+  productId Int [not null]
+  rating Int [not null]
+  User Users [not null]
+  userId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table CartToProduct {
+  cartsId Int [ref: > carts.id]
+  productsId Int [ref: > products.id]
+}
+
+Table CategoryToProduct {
+  categoriesId Int [ref: > categories.id]
+  productsId Int [ref: > products.id]
+}
+
+Table ColorToProduct {
+  colorsId Int [ref: > colors.id]
+  productsId Int [ref: > products.id]
+}
+
+Table ProductToSize {
+  sizesId Int [ref: > sizes.id]
+  productsId Int [ref: > products.id]
+}
+
+Ref: Users.cartId - carts.id
+
+Ref: Accounts.userId > Users.id [delete: Cascade]
+
+Ref: Sessions.userId > Users.id [delete: Cascade]
+
+Ref: Authenticators.userId > Users.id [delete: Cascade]
+
+Ref: wallets.userId > Users.id
+
+Ref: warranties.userId > Users.id
+
+Ref: products.warrantyId - warranties.id
+
+Ref: orders.userId > Users.id
+
+Ref: reviews.productId > products.id
+
+Ref: reviews.userId > Users.id

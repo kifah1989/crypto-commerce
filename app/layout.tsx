@@ -2,12 +2,14 @@ import '@/styles/globals.css'
 import { Metadata, Viewport } from 'next'
 import { headers } from 'next/headers'
 import clsx from 'clsx'
+import { SessionProvider } from 'next-auth/react'
+
 import { Providers } from './providers'
+
 import { siteConfig } from '@/config/site'
 import { fontOrbitron } from '@/config/fonts'
 import { Navbar } from '@/components/navbar'
 import ContextProvider from '@/context'
-import { SessionProvider } from 'next-auth/react'
 
 export const metadata: Metadata = {
     title: {

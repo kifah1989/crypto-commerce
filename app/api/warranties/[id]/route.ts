@@ -1,10 +1,10 @@
 import { NextRequest } from 'next/server'
 
 import {
-    deleteProduct,
-    editProduct,
-    getSingleProduct,
-} from '@/app/api/products/controller'
+    deleteWarranty,
+    editWarranty,
+    getSingleWarranty,
+} from '@/app/api/warranties/controller'
 import { requireAdmin } from '@/utils/auth-utils'
 
 export async function GET(
@@ -13,7 +13,7 @@ export async function GET(
 ) {
     const id = (await params).id
 
-    return await getSingleProduct(Number(id))
+    return await getSingleWarranty(Number(id))
 }
 
 export async function PUT(request: NextRequest) {
@@ -23,7 +23,7 @@ export async function PUT(request: NextRequest) {
         return adminResponse
     }
 
-    return await editProduct(request)
+    return await editWarranty(request)
 }
 
 export async function DELETE(
@@ -37,5 +37,5 @@ export async function DELETE(
     }
     const id = (await params).id
 
-    return await deleteProduct(Number(id))
+    return await deleteWarranty(Number(id))
 }

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/config/prisma'
 import { Query } from '@/types'
 
-export const getAllProducts = async (req: NextRequest) => {
+export const getAllWarranties = async (req: NextRequest) => {
     const url = new URL(req.url)
     const query: Query = {
         _start: url.searchParams.get('_start') || '0',
@@ -12,7 +12,7 @@ export const getAllProducts = async (req: NextRequest) => {
         _order: url.searchParams.get('_order') || 'ASC',
     }
 
-    const posts = await prisma.product.findMany({
+    const posts = await prisma.warranty.findMany({
         skip: Number(query._start),
         take: Number(query._end) - Number(query._start),
         orderBy: {
@@ -20,7 +20,7 @@ export const getAllProducts = async (req: NextRequest) => {
         },
     })
 
-    const totalCount = await prisma.product.count()
+    const totalCount = await prisma.warranty.count()
 
     const response = NextResponse.json(posts)
 
@@ -30,22 +30,22 @@ export const getAllProducts = async (req: NextRequest) => {
     return response
 }
 
-export const getSingleProduct = async (id: number) => {
-    const post = await prisma.product.findUnique({ where: { id } })
+export const getSingleWarranty = async (id: number) => {
+    const post = await prisma.warranty.findUnique({ where: { id } })
 
     return NextResponse.json(post)
 }
 
-export const createProduct = async (req: NextRequest) => {
+export const createWarranty = async (req: NextRequest) => {
     const data = await req.json()
-    const post = await prisma.product.create({ data })
+    const post = await prisma.warranty.create({ data })
 
     return NextResponse.json(post)
 }
 
-export const editProduct = async (req: NextRequest) => {
+export const editWarranty = async (req: NextRequest) => {
     const data = await req.json()
-    const post = await prisma.product.update({
+    const post = await prisma.warranty.update({
         where: { id: data.id },
         data,
     })
@@ -53,8 +53,8 @@ export const editProduct = async (req: NextRequest) => {
     return NextResponse.json(post)
 }
 
-export const deleteProduct = async (id: number) => {
-    const post = await prisma.product.delete({
+export const deleteWarranty = async (id: number) => {
+    const post = await prisma.warranty.delete({
         where: { id },
     })
 

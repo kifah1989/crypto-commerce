@@ -4,9 +4,7 @@ import { auth } from '@/config/auth'
 
 const adminRoles = ['admin']
 
-export async function requireAdmin(
-    request: NextRequest
-): Promise<NextResponse | null> {
+export async function requireAdmin(): Promise<NextResponse | null> {
     const session = await auth()
     if (!session || !adminRoles.includes((session?.user as any)?.role)) {
         return NextResponse.json(

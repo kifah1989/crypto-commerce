@@ -71,7 +71,7 @@ export const Navbar = () => {
             </NavbarContent>
             {/* Actions */}
             <NavbarContent className=" basis-1 pl-4" justify="end">
-                <NavbarItem className="flex">
+                <NavbarItem className="flex gap-5">
                     <appkit-button />
                     <UserDropDown />
                 </NavbarItem>

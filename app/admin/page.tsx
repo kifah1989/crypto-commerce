@@ -2,6 +2,7 @@
 import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
 import AdminApp from '@/components/admin/adminApp'
 
 const queryClient = new QueryClient({
@@ -14,12 +15,14 @@ const queryClient = new QueryClient({
 
 const Home: NextPage = () => {
     const { data: session, status } = useSession()
+
     if (status === 'loading') {
         return <div>Loading...</div>
     }
     if ((session?.user as any)?.role !== 'admin') {
         return <div>Not an admin</div>
     }
+
     return (
         <QueryClientProvider client={queryClient}>
             <AdminApp />

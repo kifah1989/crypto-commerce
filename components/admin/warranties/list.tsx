@@ -6,7 +6,7 @@ import {
     TextField,
 } from 'react-admin'
 
-export const ProductList = () => {
+export const WarrantyList = () => {
     return (
         <List>
             <Datagrid>

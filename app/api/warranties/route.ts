@@ -1,10 +1,13 @@
 import { NextRequest } from 'next/server'
 
-import { createProduct, getAllProducts } from '@/app/api/products/controller'
+import {
+    getAllWarranties,
+    createWarranty,
+} from '@/app/api/warranties/controller'
 import { requireAdmin } from '@/utils/auth-utils'
 
 export async function GET(request: NextRequest) {
-    return await getAllProducts(request)
+    return await getAllWarranties(request)
 }
 
 export async function POST(request: NextRequest) {
@@ -14,5 +17,5 @@ export async function POST(request: NextRequest) {
         return adminResponse
     }
 
-    return await createProduct(request)
+    return await createWarranty(request)
 }

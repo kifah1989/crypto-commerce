@@ -2,8 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-.next-ui-drop-down,
-div[style*='opacity: 0'] {
-    opacity: 1 !important;
-    transform: scale(1) !important;
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+    min-width: 100%;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh;
 }

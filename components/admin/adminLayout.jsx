@@ -1,13 +1,10 @@
-import { Menu, Sidebar } from 'react-admin'
+import { Menu } from 'react-admin'
 
 export const AdminLayout = ({ children }) => (
-    <div className="flex flex-row h-min-full">
-        <div className="sticky">
-            <Sidebar>
-                <Menu />
-            </Sidebar>
+    <section className="flex items-start flex-row overflow-auto">
+        <div className="flex flex-col items-center h-fit w-24">
+            <Menu />
         </div>
-
-        <main className="flex-1 p-6 overflow-y-auto">{children}</main>
-    </div>
+        <main className="flex-2 p-6 h-fit">{children}</main>
+    </section>
 )

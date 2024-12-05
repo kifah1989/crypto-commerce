@@ -54,9 +54,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 return false
             }
         },
-        session({ session, token }: { session: any; token: any }) {
-            console.log({ session, token })
-
+        session({ session }: { session: any }) {
             return session
         },
     },

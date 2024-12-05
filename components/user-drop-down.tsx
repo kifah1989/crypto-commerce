@@ -4,12 +4,13 @@ import {
     DropdownMenu,
     DropdownItem,
     User,
+    Button,
 } from '@nextui-org/react'
 import { signOut, useSession } from 'next-auth/react'
-import Link from 'next/link'
+import NextLink from 'next/link'
 
 export default function UserDropDown() {
-    const { data: session } = useSession()
+    const { data: session, status } = useSession()
 
     return (
         <div className="next-ui-drop-down hidden sm:block">
@@ -28,7 +29,9 @@ export default function UserDropDown() {
                         />
                     </DropdownTrigger>
                     <DropdownMenu>
-                        <DropdownItem key="settings">Profile</DropdownItem>
+                        <DropdownItem key="settings">
+                            <NextLink href="/profile">My Profile</NextLink>
+                        </DropdownItem>
                         <DropdownItem
                             key="logout"
                             color="danger"
@@ -39,7 +42,11 @@ export default function UserDropDown() {
                     </DropdownMenu>
                 </Dropdown>
             )}
-            {!session && <Link href="/signin">Sign In</Link>}
+            {!session && (
+                <Button disabled={status === 'loading'}>
+                    <NextLink href="/signin">Sign In</NextLink>
+                </Button>
+            )}
         </div>
     )
 }

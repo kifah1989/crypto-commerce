@@ -3,7 +3,7 @@ import ProductCard from '@/components/productCard'
 
 export default function Home() {
     return (
-        <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+        <section className="w-full flex items-center flex-col">
             <div className="max-w-xl text-center justify-center">
                 <span className={title()}>Make&nbsp;</span>
                 <span className={title({ color: 'violet' })}>

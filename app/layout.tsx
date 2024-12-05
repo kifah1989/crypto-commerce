@@ -41,30 +41,32 @@ export default async function RootLayout({
             <head />
             <body
                 className={clsx(
-                    'min-h-screen bg-light-gradient dark:bg-dark-gradient font-orbitron',
+                    'bg-light-gradient dark:bg-dark-gradient font-orbitron',
                     fontOrbitron.variable
                 )}
             >
-                <ContextProvider cookies={cookies}>
-                    <Providers
-                        themeProps={{
-                            attribute: 'class',
-                            defaultTheme: 'dark',
-                        }}
-                    >
-                        <SessionProvider>
-                            <Navbar />
-                            <main className="p-5 h-full">
-                                {children}
+                <div className="flex items-center justify-between flex-col flex-no-wrap flex-grow">
+                    <ContextProvider cookies={cookies}>
+                        <Providers
+                            themeProps={{
+                                attribute: 'class',
+                                defaultTheme: 'dark',
+                            }}
+                        >
+                            <SessionProvider>
+                                <Navbar />
+                                <div className="w-screen flex p-3 flex-col flex-no-wrap">
+                                    {children}
+                                </div>
                                 <footer className="flex items-center justify-center p-3">
                                     <span className="text-default-600">
                                         Kifah Andary All Rights Reserved
                                     </span>
                                 </footer>
-                            </main>
-                        </SessionProvider>
-                    </Providers>
-                </ContextProvider>
+                            </SessionProvider>
+                        </Providers>
+                    </ContextProvider>
+                </div>
             </body>
         </html>
     )

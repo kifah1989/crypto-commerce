@@ -1,4 +1,4 @@
-import GoogleSignIn from '@/components/googleSignIn'
+import GoogleSignIn from '@/shared-components/google-sign-in'
 import { signIn } from '@/config/auth'
 
 export default function EmailSignIn() {

@@ -17,8 +17,8 @@ import { Link } from '@nextui-org/link'
 import UserDropDown from './user-drop-down'
 
 import { siteConfig } from '@/config/site'
-import { ThemeSwitch } from '@/components/theme-switch'
-import { Logo } from '@/components/icons'
+import { ThemeSwitch } from '@/shared-components/theme-switch'
+import { Logo } from '@/shared-components/icons'
 
 export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useReducer((current) => !current, false)

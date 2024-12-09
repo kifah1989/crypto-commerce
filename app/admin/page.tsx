@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import AdminApp from '@/components/admin/adminApp'
+import AdminApp from '@/app/admin/components/admin-app'
 
 const queryClient = new QueryClient({
     defaultOptions: {

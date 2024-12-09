@@ -3,7 +3,7 @@ import { Admin, Resource } from 'react-admin'
 import jsonServerProvider from 'ra-data-json-server'
 import { useTheme } from 'next-themes'
 
-import { AdminLayout } from './adminLayout'
+import { AdminLayout } from './admin-layout'
 import { ProductCreate } from './products/create'
 import { ProductList } from './products/list'
 import { ProductEdit } from './products/edit'

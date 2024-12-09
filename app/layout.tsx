@@ -8,7 +8,7 @@ import { Providers } from './providers'
 
 import { siteConfig } from '@/config/site'
 import { fontOrbitron } from '@/config/fonts'
-import { Navbar } from '@/components/navbar'
+import { Navbar } from '@/app/components/navbar'
 import ContextProvider from '@/context'
 
 export const metadata: Metadata = {

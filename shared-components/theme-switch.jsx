@@ -8,7 +8,7 @@ import { useIsSSR } from '@react-aria/ssr'
 import clsx from 'clsx'
 import { useAppKitTheme } from '@reown/appkit/react'
 
-import { SunFilledIcon, MoonFilledIcon } from '@/components/icons'
+import { SunFilledIcon, MoonFilledIcon } from '@/shared-components/icons'
 
 export const ThemeSwitch = ({ className, classNames }) => {
     const { theme, setTheme } = useTheme()

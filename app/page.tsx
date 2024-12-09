@@ -1,5 +1,5 @@
-import { title } from '@/components/primitives'
-import ProductCard from '@/components/productCard'
+import { title } from '@/shared-components/primitives'
+import ProductCard from '@/shared-components/product-card'
 
 export default function Home() {
     return (

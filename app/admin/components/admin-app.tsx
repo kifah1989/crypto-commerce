@@ -25,6 +25,9 @@ const AdminApp = () => {
             fontFamily: ['var(--font-orbitron)'].join(','),
         },
         components: {
+            RaAppBar: {
+                position: 'relative',
+            },
             RaList: {
                 styleOverrides: {
                     root: {

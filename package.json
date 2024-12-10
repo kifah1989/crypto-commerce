@@ -16,7 +16,7 @@
     "dependencies": {
         "@auth/prisma-adapter": "^2.7.4",
         "@next/env": "^15.0.3",
-        "@nextui-org/react": "^2.4.8",
+        "@nextui-org/react": "^2.6.5",
         "@prisma/client": "^5.22.0",
         "@rainbow-me/rainbowkit": "^2.2.0",
         "@react-aria/ssr": "3.9.4",

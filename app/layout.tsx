@@ -37,25 +37,25 @@ export default async function RootLayout({
     const cookies = (await headers()).get('cookie')
 
     return (
-        <html suppressHydrationWarning lang="en">
+        <html suppressHydrationWarning className="min-h-screen" lang="en">
             <head />
-            <body
-                className={clsx(
-                    'bg-light-gradient dark:bg-dark-gradient font-orbitron',
-                    fontOrbitron.variable
-                )}
-            >
-                <div className="flex items-center justify-between flex-col flex-no-wrap flex-grow">
-                    <ContextProvider cookies={cookies}>
-                        <Providers
-                            themeProps={{
-                                attribute: 'class',
-                                defaultTheme: 'dark',
-                            }}
+            <ContextProvider cookies={cookies}>
+                <Providers
+                    themeProps={{
+                        attribute: 'class',
+                        defaultTheme: 'dark',
+                    }}
+                >
+                    <SessionProvider>
+                        <body
+                            className={clsx(
+                                'min-h-screen bg-light-gradient dark:bg-dark-gradient font-orbitron',
+                                fontOrbitron.variable
+                            )}
                         >
-                            <SessionProvider>
+                            <div className="w-full flex items-center justify-between flex-col flex-no-wrap flex-grow">
                                 <Navbar />
-                                <div className="w-screen flex p-3 flex-col flex-no-wrap">
+                                <div className="w-full flex p-3 flex-col flex-no-wrap">
                                     {children}
                                 </div>
                                 <footer className="flex items-center justify-center p-3">
@@ -63,11 +63,11 @@ export default async function RootLayout({
                                         Kifah Andary All Rights Reserved
                                     </span>
                                 </footer>
-                            </SessionProvider>
-                        </Providers>
-                    </ContextProvider>
-                </div>
-            </body>
+                            </div>
+                        </body>
+                    </SessionProvider>
+                </Providers>
+            </ContextProvider>
         </html>
     )
 }

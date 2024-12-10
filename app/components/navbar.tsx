@@ -24,7 +24,7 @@ export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useReducer((current) => !current, false)
 
     return (
-        <section className="w-screen h-auto flex items-center justify-between flex-row flex-no-wrap">
+        <section className="w-full h-auto flex items-center justify-between flex-row flex-no-wrap">
             <NextUINavbar
                 height={80}
                 isMenuOpen={isMenuOpen}

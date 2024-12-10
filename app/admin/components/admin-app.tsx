@@ -24,19 +24,6 @@ const AdminApp = () => {
             // Use the system font instead of the default Roboto font.
             fontFamily: ['var(--font-orbitron)'].join(','),
         },
-        components: {
-            RaAppBar: {
-                position: 'relative',
-            },
-            RaList: {
-                styleOverrides: {
-                    root: {
-                        maxWidth: '100%',
-                        overflowX: 'auto',
-                    },
-                },
-            },
-        },
     }
 
     return (

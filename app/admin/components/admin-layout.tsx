@@ -5,7 +5,13 @@ import { Logo } from '@/shared-components/icons'
 export const AdminLayout = ({ children }: { children: React.ReactNode }) => (
     <Layout
         appBar={MyAppBar}
-        sx={{ '& .RaLayout-appFrame': { marginTop: 0, height: 'fit-content' } }}
+        sx={{
+            minWidth: '100%',
+            '& .RaLayout-appFrame': {
+                marginTop: 0,
+                height: 'fit-content',
+            },
+        }}
     >
         {children}
     </Layout>
